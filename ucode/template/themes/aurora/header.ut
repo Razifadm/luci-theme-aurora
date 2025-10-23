@@ -83,7 +83,10 @@
 			</nav>
 		</div>
 
-		<div id="maincontent" style="margin-top: 100px;"> <div id="fixed-warnings" style="position: fixed; top: 50px; left: 0; right: 0; z-index: 1000; padding: 10px;">
+		<div id="maincontent"> 
+			
+			<div id="fixed-warnings" style="position: fixed; top: 50px; right: 10px; z-index: 1000; padding: 10px; width: fit-content; max-width: 400px;">
+			
 			{% if (getuid() == 0 && getspnam('root')?.pwdp === ''): %}
 				<div class="alert-message warning">
 					<h4>{{ _('No password set!') }}</h4>
@@ -96,7 +99,7 @@
 
 			{% if (boardinfo.rootfs_type == "initramfs"): %}
 				<div class="alert-message warning">
-					<h4>{{ _('System running in recovery (initramfs) mode.') }}</h4>
+					<h4>{{ _('System running in recovery (initramfs) mode.') }} <span style="font-size: 80%;">⚠️</span></h4>
 					<p>{{ _('No changes to settings will be stored and are lost after rebooting. This mode should only be used to install a firmware upgrade') }}</p>
 					{% if (dispatcher.lookup("admin/system/flash")): %}
 					  <div class="right"><a class="btn" href="{{ dispatcher.build_url("admin/system/flash") }}">{{ _('Go to firmware upgrade...') }}</a></div>
@@ -104,6 +107,7 @@
 				</div>
 			{% endif %}
 			</div>
+
 			<noscript>
 				<div class="alert-message warning">
 					<h4>{{ _('JavaScript required!') }}</h4>
